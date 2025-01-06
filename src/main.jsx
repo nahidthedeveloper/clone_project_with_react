@@ -17,9 +17,13 @@ createRoot(document.getElementById('root')).render(
                 <ThemeProvider>
                     <CursorProvider>
                         <MainLayout>
-                            <Appbar/>
-                            <App/>
-                            <Footer/>
+                            <div style={{position: "relative", zIndex: 99}}>
+                                <Appbar/>
+                            </div>
+                            <div style={{position: "relative", zIndex: 98}}>
+                                <App/>
+                                <Footer/>
+                            </div>
                         </MainLayout>
                     </CursorProvider>
                 </ThemeProvider>

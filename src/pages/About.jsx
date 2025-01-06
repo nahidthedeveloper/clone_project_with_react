@@ -1,6 +1,7 @@
 import Hero from "../components/About/Hero.jsx";
 import SectionOne from "../components/About/sectionOne.jsx";
 import SectionTwo from "../components/About/sectionTwo.jsx";
+import Footer from "../components/About/Footer.jsx";
 
 const About = () => {
     return (
@@ -445,28 +446,10 @@ const About = () => {
                         </div>
                     </div>
                 </section>
-                <section>
-                    <div
-                        className="text-[5.2vw] md:text-[2.2vw] mb-[8vw] md:mb-[3vw] text-[var(--color-light)] md:relative">
-                        <hr className="border-light"/>
-                        <div
-                            className="mt-[10vw] text-[6vw] md:text-[4.5vw] leading-[6vw] md:leading-[4vw]"
-                            style={{fontFamily: '"Exil71",serif'}}
-                        >
-                            <div className="overflow-hidden">
-                                <h1 className="translate-y-[-1vw]">BUILD</h1>
-                            </div>
-                            <div className="overflow-hidden">
-                                <h1 className="translate-y-[-1vw]">JESPER</h1>
-                            </div>
-                            <div className="overflow-hidden">
-                                <h1 className="translate-y-[-1vw]">LANDBERG</h1>
-                            </div>
-                        </div>
-                    </div>
-                </section>
             </div>
-
+            <hr className="border-light"/>
+            <Footer/>
+            <hr className="border-light"/>
         </div>
     );
 };
