@@ -1,6 +1,24 @@
+import gsap from 'gsap';
+import {useGSAP} from "@gsap/react";
+import {useRef} from "react";
+
+gsap.registerPlugin(useGSAP)
+
+
 export default function Hero() {
+    const homeHeroRef = useRef(null);
+
+    useGSAP(() => {
+        gsap.from(homeHeroRef.current.querySelectorAll('h3, svg'), {
+            y: 300,
+            duration: 0.8,
+            stagger: 0.1,
+            ease: 'power2.out'
+        })
+
+    }, {scope: homeHeroRef});
     return (
-        <section className="md:mb-[162px]">
+        <section ref={homeHeroRef} className="md:mb-[162px]">
             <div className="section1_left mt-8 text-[9vw] uppercase font-bold text-[#212121]"
                  style={{fontFamily: 'Exil71, serif', lineHeight: '4vw'}}>
                 <div className="overflow-hidden h-[8.2vw]">

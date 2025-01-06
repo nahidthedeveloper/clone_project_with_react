@@ -1,6 +1,6 @@
 export default function MainLayout({children}) {
     return (
-        <div className="mx-4 md:mx-14">
+        <div className="px-4 md:px-14 overflow-x-hidden">
             {children}
         </div>
     );

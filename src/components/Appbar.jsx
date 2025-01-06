@@ -1,10 +1,50 @@
 import {Link, useLocation} from "react-router-dom";
+import {useGSAP} from "@gsap/react";
+import gsap from "gsap";
+import {ScrollTrigger} from "gsap/ScrollTrigger";
+import {useRef} from "react";
+
+gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(useGSAP);
 
 const Appbar = () => {
     const location = useLocation();
+
+    const navRef = useRef(null);
+
+    useGSAP(() => {
+
+        gsap.from('nav', {
+            opacity: 0,
+            duration: 2,
+            ease: 'power2.out'
+        })
+
+        gsap.to(navRef.current, {
+            opacity: 0,
+            ease: 'power2.out',
+            delay: 1,
+            scrollTrigger: {
+                scroller: document.body,
+                trigger: navRef.current,
+                start: 'bottom 2%',
+                end: 'top 12%',
+                scrub: 1,
+                // markers: true,
+            }
+        });
+
+        gsap.from(navRef.current.querySelector('hr'), {
+            width: '10%',
+            duration: 2,
+            ease: 'power2.out',
+        })
+    }, {scope: navRef})
+
+
     return (
-        <>
-            <div
+        <div ref={navRef}>
+            <nav
                 className={`flex justify-between py-10 text-[3vw] md:text-[1.1vw] ${location.pathname === '/' ? 'text-dark' : 'text-light'}`}>
                 <div>
                     <Link to="/">Chris Wilcock ©</Link>
@@ -32,9 +72,9 @@ const Appbar = () => {
                         </Link>
                     </li>
                 </ul>
-            </div>
-            <hr className={`${location.pathname === '/' ? 'border-dark' : 'border-light'}`} id="firstHR"/>
-        </>
+            </nav>
+            <hr className={`${location.pathname === '/' ? 'border-dark' : 'border-light'}`}/>
+        </div>
     );
 };
 
