@@ -8,19 +8,22 @@ import MainLayout from "./Layout/MainLayout.jsx";
 import Footer from "./components/Footer.jsx";
 import CursorProvider from "./provider/cursorProvider.jsx";
 import ThemeProvider from "./provider/themeProvider.jsx";
+import TransitionProvider from "./provider/TransitionProvider.jsx";
 
 createRoot(document.getElementById('root')).render(
     <StrictMode>
         <BrowserRouter>
-            <ThemeProvider>
-                <CursorProvider>
-                    <MainLayout>
-                        <Appbar/>
-                        <App/>
-                        <Footer/>
-                    </MainLayout>
-                </CursorProvider>
-            </ThemeProvider>
+            <TransitionProvider>
+                <ThemeProvider>
+                    <CursorProvider>
+                        <MainLayout>
+                            <Appbar/>
+                            <App/>
+                            <Footer/>
+                        </MainLayout>
+                    </CursorProvider>
+                </ThemeProvider>
+            </TransitionProvider>
         </BrowserRouter>
     </StrictMode>,
 )
