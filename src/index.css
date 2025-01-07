@@ -72,3 +72,18 @@ body {
         background-position: 0 0;
     }
 }
+
+
+ .hero-1 {
+     background-color: #f4db33; /* Yellow */
+ }
+.hero-2 {
+    background-color: #972ff8; /* Purple */
+}
+.hero-3 {
+    background-color: #7dd6fe; /* Blue */
+}
+.hero-4 {
+    background-color: #dc3c84; /* Pink */
+}
+
