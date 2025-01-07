@@ -1,4 +1,5 @@
 import ProjectHero from "../../components/ProjectHero.jsx";
+import CommonLayout from "../../Layout/CommonLayout.jsx";
 
 const data = {
     'image': '/images/index/one.avif',
@@ -18,6 +19,13 @@ export default function DiscoverylandCo() {
                 role={data.role}
                 credits={data.credits}
             />
+
+            <CommonLayout>
+                <video width="100%" height="100%" autoPlay loop muted>
+                    <source src="/projects/DiscoverylandCo/1919284378.mp4" type="video/mp4"/>
+                    Your browser does not support the video tag.
+                </video>
+            </CommonLayout>
 
 
         </div>
