@@ -10,15 +10,13 @@
 @font-face {
     font-family: 'Exil71';
     src: url('/fonts/EXIL71.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
     font-family: 'nmRegular';
     src: url('/fonts/NeueMontreal-Regular.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
+    font-display: swap;
 }
 
 * {

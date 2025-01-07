@@ -1,31 +1,11 @@
 import {useGSAP} from "@gsap/react";
 import gsap from "gsap";
 import {useRef} from "react";
-
-gsap.registerPlugin(useGSAP)
+import {ScrollTrigger} from "gsap/ScrollTrigger";
 
 export default function SectionOne() {
-    const sectionOneRef = useRef(null)
-    useGSAP(() => {
-        gsap.utils.toArray(sectionOneRef.current.querySelectorAll('h1')).forEach(h1 => {
-            gsap.from(h1, {
-                duration: 1,
-                y: 300,
-                ease: 'power2.out',
-                scrollTrigger: {
-                    trigger: h1,
-                    start: 'top 130%',
-                    end: 'bottom 10%',
-                    once: true,
-                    scroller: document.body,
-                    // markers: true
-                }
-            });
-        });
-    }, {scope: sectionOneRef})
-
     return (
-        <section ref={sectionOneRef} className=" text-[5.2vw] md:text-[2.2vw] text-light">
+        <section className=" text-[5.2vw] md:text-[2.2vw] text-light">
             <div className="mx-0 md:mr-[8vw]">
                 <div className="mt-[23vw] flex justify-center">
                     <div className="md:ml-[5vw]">

@@ -14,7 +14,7 @@ const Appbar = () => {
 
     useGSAP(() => {
 
-        gsap.from('nav', {
+        gsap.from(navRef.current.querySelector('nav'), {
             opacity: 0,
             duration: 2,
             ease: 'power2.out'

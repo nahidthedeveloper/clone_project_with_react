@@ -1,16 +1,12 @@
-import {useEffect} from "react";
+import {useLayoutEffect} from "react";
 import {useLocation} from "react-router-dom";
 
 export default function ThemeProvider({children}) {
     const location = useLocation();
 
-    useEffect(() => {
-        if (location.pathname === '/') {
-            document.body.className = 'bg-light';
-        } else {
-            document.body.className = 'bg-dark noise';
-        }
+    useLayoutEffect(() => {
+        document.body.className = location.pathname === '/' ? 'bg-light' : 'bg-dark noise';
     }, [location]);
 
-    return <div>{children}</div>;
+    return <>{children}</>;
 }

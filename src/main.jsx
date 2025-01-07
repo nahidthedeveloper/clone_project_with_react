@@ -9,25 +9,29 @@ import Footer from "./components/Footer.jsx";
 import CursorProvider from "./provider/cursorProvider.jsx";
 import ThemeProvider from "./provider/themeProvider.jsx";
 import TransitionProvider from "./provider/TransitionProvider.jsx";
+import LenisScrollProvider from "./provider/LenisScrollProvider.jsx";
 
 createRoot(document.getElementById('root')).render(
     <StrictMode>
-        <BrowserRouter>
-            <TransitionProvider>
-                <ThemeProvider>
-                    <CursorProvider>
-                        <MainLayout>
-                            <div style={{position: "relative", zIndex: 99}}>
-                                <Appbar/>
-                            </div>
-                            <div style={{position: "relative", zIndex: 98}}>
-                                <App/>
-                                <Footer/>
-                            </div>
-                        </MainLayout>
-                    </CursorProvider>
-                </ThemeProvider>
-            </TransitionProvider>
-        </BrowserRouter>
+        <LenisScrollProvider>
+            <BrowserRouter>
+                <TransitionProvider>
+
+                    <ThemeProvider>
+                        <CursorProvider>
+                            <MainLayout>
+                                <div style={{position: "relative", zIndex: 99}}>
+                                    <Appbar/>
+                                </div>
+                                <div style={{position: "relative", zIndex: 98}}>
+                                    <App/>
+                                    <Footer/>
+                                </div>
+                            </MainLayout>
+                        </CursorProvider>
+                    </ThemeProvider>
+                </TransitionProvider>
+            </BrowserRouter>
+        </LenisScrollProvider>
     </StrictMode>,
 )

@@ -1,6 +1,6 @@
-import { useGSAP } from "@gsap/react";
+import {useGSAP} from "@gsap/react";
 import gsap from "gsap";
-import { useRef } from "react";
+import {useRef} from "react";
 
 gsap.registerPlugin(useGSAP);
 
@@ -9,7 +9,7 @@ export default function Hero() {
     const overlayImageRef = useRef(null);
 
     useGSAP(() => {
-        const tl = gsap.timeline({ paused: true });
+        const tl = gsap.timeline({paused: true});
         tl.from(aboutHeroRef.current.querySelectorAll('h3'), {
             y: 300,
             duration: 0.8,
@@ -19,6 +19,7 @@ export default function Hero() {
 
         tl.to(overlayImageRef.current.querySelector('.overlay'), {
             width: 0,
+            opacity: 0,
             duration: 0.8,
         }, 'a');
         tl.from(overlayImageRef.current.querySelector('img'), {
@@ -28,11 +29,11 @@ export default function Hero() {
         }, 'a');
 
         tl.play();
-    }, { scope: aboutHeroRef });
+    }, {scope: aboutHeroRef});
 
     return (
         <div className="relative">
-            <div style={{ position: "relative", zIndex: 2 }}>
+            <div style={{position: "relative", zIndex: 2}}>
                 <section ref={aboutHeroRef} className="my-[10vw] md:my-[7vw]">
                     <div className="section1_left text-[9vw] uppercase font-bold text-light leading-[4vw] font-Exil71">
                         {['Ui+Ux', 'Design', 'Brand', 'Website'].map((text, index) => (
@@ -60,9 +61,9 @@ export default function Hero() {
                 }}
             >
                 <div className="relative w-full h-full">
-                    <div className="overlay absolute left-0 top-0 w-full h-full bg-dark noise" />
+                    <div className="overlay absolute left-0 top-0 w-full h-full bg-dark noise z-10"/>
                     <img
-                        className="right-0 h-full w-full object-cover object-center"
+                        className="right-0 h-full w-full object-cover object-center opacity-30 z-20"
                         src="images/about/men.jpg"
                         alt="Men"
                     />
