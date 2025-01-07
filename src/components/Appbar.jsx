@@ -2,50 +2,65 @@ import {Link, useLocation} from "react-router-dom";
 import {useGSAP} from "@gsap/react";
 import gsap from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
-import {useRef} from "react";
+import {useRef, useEffect, useState} from "react";
 
 gsap.registerPlugin(ScrollTrigger);
-gsap.registerPlugin(useGSAP);
 
 const Appbar = () => {
     const location = useLocation();
-
     const navRef = useRef(null);
+    const [isDarkTheme, setIsDarkTheme] = useState(document.body.classList.contains("bg-dark"));
+
+    useEffect(() => {
+        const updateTheme = () => {
+            setIsDarkTheme(document.body.classList.contains("bg-dark"));
+        };
+
+        updateTheme();
+        const observer = new MutationObserver(updateTheme);
+        observer.observe(document.body, {attributes: true, attributeFilter: ["class"]});
+
+        return () => observer.disconnect();
+    }, [location]);
 
     useGSAP(() => {
-
-        gsap.from(navRef.current.querySelector('nav'), {
+        gsap.from(navRef.current.querySelector("nav"), {
             opacity: 0,
             duration: 2,
-            ease: 'power2.out'
-        })
+            ease: "power2.out",
+        });
 
         gsap.to(navRef.current, {
             opacity: 0,
-            ease: 'power2.out',
+            y: -100,
+            duration: 2,
             delay: 1,
+            ease: "power2.out",
             scrollTrigger: {
                 scroller: document.body,
                 trigger: navRef.current,
-                start: 'bottom 2%',
-                end: 'top 12%',
+                start: "bottom 2%",
+                end: "top 12%",
                 scrub: 1,
-                // markers: true,
-            }
+            },
         });
 
-        gsap.from(navRef.current.querySelector('hr'), {
-            width: '10%',
+        gsap.from(navRef.current.querySelector("hr"), {
+            width: "10%",
             duration: 2,
-            ease: 'power2.out',
-        })
-    }, {scope: navRef})
+            ease: "power2.out",
+        });
+    }, {scope: navRef});
 
+    const isProjectPage = location.pathname.startsWith("/project");
 
     return (
-        <div ref={navRef}>
+        <div ref={navRef} className="fixed w-full px-4 md:px-14">
             <nav
-                className={`flex justify-between py-10 text-[3vw] md:text-[1.1vw] ${location.pathname === '/' ? 'text-dark' : 'text-light'}`}>
+                className={`flex justify-between py-10 text-[3vw] md:text-[1.1vw] ${
+                    isProjectPage ? "text-light" : isDarkTheme ? "text-light" : "text-dark"
+                }`}
+            >
                 <div>
                     <Link to="/">Chris Wilcock ©</Link>
                 </div>
@@ -73,7 +88,7 @@ const Appbar = () => {
                     </li>
                 </ul>
             </nav>
-            <hr className={`${location.pathname === '/' ? 'border-dark' : 'border-light'}`}/>
+            <hr className={`${isProjectPage ? "border-light" : isDarkTheme ? "border-light" : "border-dark"}`}/>
         </div>
     );
 };

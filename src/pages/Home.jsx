@@ -1,12 +1,13 @@
 import Hero from "../components/Home/Hero.jsx";
 import ImageCard from "../components/Home/ImageCard.jsx";
+import MainLayout from "../Layout/MainLayout.jsx";
 
 const Home = () => {
     return (
-        <div>
+        <MainLayout>
             <Hero/>
             <ImageCard/>
-        </div>
+        </MainLayout>
     );
 };
 

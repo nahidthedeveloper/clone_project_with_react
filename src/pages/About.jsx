@@ -7,6 +7,7 @@ import {useRef} from "react";
 import {useGSAP} from "@gsap/react";
 import gsap from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
+import MainLayout from "../Layout/MainLayout.jsx";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -38,17 +39,19 @@ const About = () => {
     }, {scope: containerRef});
 
     return (
-        <div ref={containerRef}>
-            <Hero/>
-            <SectionOne/>
-            <hr className="border-light"/>
-            <SectionTwo/>
-            <hr className="border-light"/>
-            <AwardsSection/>
-            <hr className="border-light"/>
-            <Footer/>
-            <hr className="border-light"/>
-        </div>
+        <MainLayout>
+            <div ref={containerRef}>
+                <Hero/>
+                <SectionOne/>
+                <hr className="border-light"/>
+                <SectionTwo/>
+                <hr className="border-light"/>
+                <AwardsSection/>
+                <hr className="border-light"/>
+                <Footer/>
+                <hr className="border-light"/>
+            </div>
+        </MainLayout>
     );
 };
 

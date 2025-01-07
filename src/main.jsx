@@ -16,18 +16,11 @@ createRoot(document.getElementById('root')).render(
         <LenisScrollProvider>
             <BrowserRouter>
                 <TransitionProvider>
-
                     <ThemeProvider>
                         <CursorProvider>
-                            <MainLayout>
-                                <div style={{position: "relative", zIndex: 99}}>
-                                    <Appbar/>
-                                </div>
-                                <div style={{position: "relative", zIndex: 98}}>
-                                    <App/>
-                                    <Footer/>
-                                </div>
-                            </MainLayout>
+                            <Appbar/>
+                            <App/>
+                            <Footer/>
                         </CursorProvider>
                     </ThemeProvider>
                 </TransitionProvider>

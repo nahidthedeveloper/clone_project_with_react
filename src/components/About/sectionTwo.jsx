@@ -2,7 +2,6 @@ import {useRef} from "react";
 import {useGSAP} from "@gsap/react";
 import gsap from "gsap";
 
-// Array of brand names and their corresponding images
 const brandData = [
     {name: "Adidas", image: "images/about/list/1.jpg"},
     {name: "Bacardi", image: "images/about/list/2.jpg"},
@@ -31,7 +30,7 @@ export default function SectionTwo() {
     useGSAP(() => {
         const listImages = sectionTwoRef.current.querySelectorAll('.list_image');
 
-        listImages.forEach((listImage, index) => {
+        listImages.forEach((listImage) => {
             const imageDiv = listImage.querySelector('.imageDiv');
 
             listImage.addEventListener('mouseenter', (event) => {
