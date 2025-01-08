@@ -41,7 +41,7 @@ export default function TransitionProvider({children}) {
         <div>
             <div
                 ref={overlay}
-                className="block h-screen w-full fixed top-0 left-0 bg-dark noise font-Exil71"
+                className="block h-screen w-full fixed top-0 left-0 bg-dark noise font-Exil71 cursor-wait"
                 style={{zIndex: "10000"}}
             >
                 <div className="fixed bottom-8 left-8">

@@ -8,13 +8,13 @@ const Test = () => {
     useGSAP(() => {
         const elements = imgRef.current.querySelectorAll(".element");
         elements.forEach((element) => {
-            element.addEventListener("click", () => makeFullWindow(element, 2000));
+            element.addEventListener("click", () => makeFullWindow(element));
         });
     }, {scope: imgRef});
 
 
     return (
-        <main className="h-screen w-full flex justify-center items-center gap-3" ref={imgRef}>
+        <main className="h-screen w-full flex justify-center items-center gap-3 overflow-visible" ref={imgRef}>
             <div className="element w-1/3 h-1/2">
                 <img className="h-full w-full object-center object-cover" src="/images/index/one.avif" alt=""/>
             </div>

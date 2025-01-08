@@ -13,8 +13,10 @@ export const useTheme = () => {
         const observer = new MutationObserver(updateTheme);
         observer.observe(document.body, {
             attributes: true,
-            attributeFilter: ["class"]
+            attributeFilter: ["class"],
         });
+
+        updateTheme();
 
         return () => observer.disconnect();
     }, []);

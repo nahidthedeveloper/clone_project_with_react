@@ -7,8 +7,8 @@ import {useTheme} from "../hooks/useTheme.js";
 
 gsap.registerPlugin(ScrollTrigger);
 const links = [
-    { path: "/about", label: "About" },
-    { path: "/test", label: "Test" },
+    {path: "/about", label: "About"},
+    {path: "/test", label: "Test"},
 ];
 
 const Appbar = () => {
