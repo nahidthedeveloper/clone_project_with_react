@@ -1,28 +1,17 @@
-import {Link, useLocation} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {useGSAP} from "@gsap/react";
 import gsap from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
-import {useRef, useEffect, useState} from "react";
+import {useRef} from "react";
+import {useTheme} from "../hooks/useTheme.js";
+
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Footer() {
-    const location = useLocation();
     const footerRef = useRef(null);
-    const [isDarkTheme, setIsDarkTheme] = useState(document.body.classList.contains("bg-dark"));
+    const {isDarkTheme} = useTheme()
 
-    useEffect(() => {
-        const updateTheme = () => {
-            setIsDarkTheme(document.body.classList.contains("bg-dark"));
-        };
-
-        updateTheme();
-
-        const observer = new MutationObserver(updateTheme);
-        observer.observe(document.body, {attributes: true, attributeFilter: ["class"]});
-
-        return () => observer.disconnect();
-    }, [location]);
 
     useGSAP(() => {
         gsap.utils.toArray(footerRef.current.querySelectorAll(".footer-anim")).forEach((footer) => {

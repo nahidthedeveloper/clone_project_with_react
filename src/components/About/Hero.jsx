@@ -2,8 +2,6 @@ import {useGSAP} from "@gsap/react";
 import gsap from "gsap";
 import {useRef} from "react";
 
-gsap.registerPlugin(useGSAP);
-
 export default function Hero() {
     const aboutHeroRef = useRef(null);
     const overlayImageRef = useRef(null);
