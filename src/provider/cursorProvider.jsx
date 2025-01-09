@@ -63,7 +63,7 @@ export default function CursorProvider({children}) {
     }, {scope: cursorRef})
     return (
         <div>
-            <div ref={cursorRef} id='cursor'
+            <div ref={cursorRef} id='cursor' style={{zIndex: 10001}}
                  className="h-[50px] w-[50px] rounded-full fixed top-0 left-0 border-2 border-blue-500 pointer-events-none opacity-0">
             </div>
             {children}
