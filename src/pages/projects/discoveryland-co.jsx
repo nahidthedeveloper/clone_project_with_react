@@ -21,10 +21,13 @@ export default function DiscoverylandCo() {
             />
 
             <CommonLayout>
-                <video width="100%" height="100%" autoPlay loop muted>
+                <video autoPlay loop muted
+                    className="h-full w-full object-cover"
+                >
                     <source src="/projects/DiscoverylandCo/1919284378.mp4" type="video/mp4"/>
                     Your browser does not support the video tag.
                 </video>
+
             </CommonLayout>
 
 
