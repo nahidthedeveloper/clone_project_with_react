@@ -1,5 +1,9 @@
 import gsap from "gsap";
 
+const initPath = `M 0 0 Q0 50 0 100 Q50 100 100 100 Q100 50 100 0 Q50 0 0 0 Z`
+const insidePath = `M 0 0 Q5 50 0 100 Q50 90 100 100 Q95 50 100 0 Q50 10 0 0 Z`
+const outsidePath = `M 10 10 Q0 50 10 90 Q50 100 90 90 Q100 50 90 10 Q50 0 10 10 Z`
+
 export const makeFullWindow = (animatedElement) => {
     if (!animatedElement || !(animatedElement instanceof HTMLElement)) {
         console.error("Invalid animatedElement provided.");
@@ -17,16 +21,9 @@ export const makeFullWindow = (animatedElement) => {
         height: window.innerHeight,
     };
 
-    const maskPath = `
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
-            <path d="M 0 0 Q5 50 0 100 Q50 90 100 100 Q95 50 100 0 Q50 10 0 0 Z" fill="white" />
-        </svg>`;
-
-    const encodedMaskPath = `data:image/svg+xml;base64,${btoa(maskPath)}`;
-
     const maskStyles = `
-        mask-image: url(${encodedMaskPath});
-        -webkit-mask-image: url(${encodedMaskPath});
+        mask-image: url(${encodedMaskPath(initPath)});
+        -webkit-mask-image: url(${encodedMaskPath(initPath)});
         mask-size: cover;
         -webkit-mask-size: cover;
         mask-repeat: no-repeat;
@@ -50,22 +47,45 @@ export const makeFullWindow = (animatedElement) => {
         margin: 0,
     });
 
-    const tl = gsap.timeline();
-
-    tl.to(clone, {
-        duration: 2,
-        // top: `${to.top}px`,
-        // left: `${to.left}px`,
-        // width: `${to.width}px`,
-        // height: `${to.height}px`,
-        scale: 1.5,
-        autoRound: false,
-        ease: "power2.out",
+    const tl = gsap.timeline({
         onComplete: () => {
             document.body.removeChild(clone);
             gsap.set(animatedElement, {visibility: "visible"});
         },
     });
+
+    tl
+        .to(clone, {
+            duration: 0.5,
+            scale: 1.3,
+            autoRound: false,
+            ease: "power2.out",
+            onUpdate: () => {
+                const maskUrl = `url(${encodedMaskPath(insidePath)})`;
+                clone.style.maskImage = maskUrl;
+                clone.style.webkitMaskImage = maskUrl;
+            },
+        })
+        .to(clone, {
+            duration: 0.5,
+            autoRound: false,
+            ease: "power2.out",
+            onUpdate: () => {
+                const maskUrl = `url(${encodedMaskPath(outsidePath)})`;
+                clone.style.maskImage = maskUrl;
+                clone.style.webkitMaskImage = maskUrl;
+            },
+        })
+        .to(clone, {
+            duration: 1.5,
+            scale: 1.3,
+            top: `${to.top}px`,
+            left: `${to.left}px`,
+            width: `${to.width}px`,
+            height: `${to.height}px`,
+            autoRound: false,
+            ease: "power2.out",
+        })
 };
 
 
@@ -82,16 +102,13 @@ const calculatePosition = (element) => {
     };
 };
 
-// const initPath = `M0 0
-//          Q50 ${from.height / 2} 0 ${from.height}
-//          Q${from.width / 2} ${from.height - 50} ${from.width} ${from.height}
-//          Q${from.width - 50} ${from.height / 2} ${from.width} 0
-//          Q${from.width / 2} 50 0 0
-//          Z`
-//
-// const targetPath = `M0 0
-//          Q50 ${to.height / 2} 0 ${to.height}
-//          Q${to.width / 2} ${to.height - 50} ${to.width} ${to.height}
-//          Q${to.width - 50} ${to.height / 2} ${to.width} 0
-//          Q${to.width / 2} 50 0 0
-//          Z`
+const encodedMaskPath = (path) => {
+    const maskPath = `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <path d="${path}" fill="white" />
+        </svg>`;
+
+    return `data:image/svg+xml;base64,${btoa(maskPath)}`;
+};
+
+
