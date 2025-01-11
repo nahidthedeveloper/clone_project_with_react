@@ -55,21 +55,21 @@ export const makeFullWindow = (animatedElement, path) => {
             duration: 1,
             scale: 1.2,
             autoRound: false,
-            ease: "power2.out",
+            ease: "expoScale(0.5,7,none)",
         }, 'a')
         .to(path.current, {
             duration: 1,
             attr: {
                 d: inside
             },
-            ease: "power2.out",
+            ease: "expoScale(0.5,7,none)",
         }, 'a')
         .to(path.current, {
             duration: 0.50,
             attr: {
                 d: outside
             },
-            ease: "power2.out",
+            ease: "expoScale(0.5,7,none)"
         }, 'b')
         .to(clone, {
             duration: 1.5,
@@ -79,15 +79,14 @@ export const makeFullWindow = (animatedElement, path) => {
             width: `${to.width}px`,
             height: `${to.height}px`,
             autoRound: false,
-            ease: "power2.out",
+            ease: "expoScale(0.5,7,none)",
         }, 'b')
         .to(path.current, {
-            duration: 0.15,
             attr: {
                 d: initial
             },
-            ease: "power2.out",
-        })
+            ease: "sine.in",
+        }, '-=0.5')
 };
 
 const calculatePosition = (element) => {
