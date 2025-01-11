@@ -1,10 +1,6 @@
 import gsap from "gsap";
 
-const initPath = `M 0 0 Q0 50 0 100 Q50 100 100 100 Q100 50 100 0 Q50 0 0 0 Z`
-const insidePath = `M 0 0 Q5 50 0 100 Q50 90 100 100 Q95 50 100 0 Q50 10 0 0 Z`
-const outsidePath = `M 10 10 Q0 50 10 90 Q50 100 90 90 Q100 50 90 10 Q50 0 10 10 Z`
-
-export const makeFullWindow = (animatedElement) => {
+export const makeFullWindow = (animatedElement, path) => {
     if (!animatedElement || !(animatedElement instanceof HTMLElement)) {
         console.error("Invalid animatedElement provided.");
         return;
@@ -21,18 +17,8 @@ export const makeFullWindow = (animatedElement) => {
         height: window.innerHeight,
     };
 
-    const maskStyles = `
-        mask-image: url(${encodedMaskPath(initPath)});
-        -webkit-mask-image: url(${encodedMaskPath(initPath)});
-        mask-size: cover;
-        -webkit-mask-size: cover;
-        mask-repeat: no-repeat;
-        -webkit-mask-repeat: no-repeat;
-    `;
-
-    clone.classList = '';
-    clone.style.cssText += maskStyles;
-
+    const img = clone.querySelector('img');
+    img.style.clipPath = 'url(#clipPath)';
     document.body.appendChild(clone);
 
     gsap.set(animatedElement, {visibility: "hidden"});
@@ -45,7 +31,12 @@ export const makeFullWindow = (animatedElement) => {
         zIndex: 1000,
         overflow: "hidden",
         margin: 0,
-    });
+    })
+    gsap.set(path.current, {
+        attr: {
+            d: "M0 0C0 0 0.302755 0 0.5 0C0.697245 0 1 0 1 0C1 0 1 0.326565 1 0.52381C1 0.721054 1 1 1 1C1 1 0.697245 1 0.5 1C0.302755 1 0 1 0 1C0 1 0 0.697245 0 0.5C0 0.302755 0 0 0 0Z"
+        },
+    })
 
     const tl = gsap.timeline({
         onComplete: () => {
@@ -56,38 +47,43 @@ export const makeFullWindow = (animatedElement) => {
 
     tl
         .to(clone, {
-            duration: 0.5,
+            duration: 0.50,
             scale: 1.3,
             autoRound: false,
             ease: "power2.out",
-            onUpdate: () => {
-                const maskUrl = `url(${encodedMaskPath(insidePath)})`;
-                clone.style.maskImage = maskUrl;
-                clone.style.webkitMaskImage = maskUrl;
-            },
-        })
-        .to(clone, {
+        }, 'a')
+        .to(path.current, {
             duration: 0.5,
-            autoRound: false,
-            ease: "power2.out",
-            onUpdate: () => {
-                const maskUrl = `url(${encodedMaskPath(outsidePath)})`;
-                clone.style.maskImage = maskUrl;
-                clone.style.webkitMaskImage = maskUrl;
+            attr: {
+                d: "M0 0C0 0 0.302755 0.0714286 0.5 0.0714286C0.697245 0.0714286 1 0 1 0C1 0 0.928571 0.302755 0.928571 0.5C0.928571 0.697245 1 1 1 1C1 1 0.697245 0.928571 0.5 0.928571C0.302755 0.928571 0 1 0 1C0 1 0.0714286 0.697245 0.0714286 0.5C0.0714286 0.302755 0 0 0 0Z"
             },
-        })
+            ease: "power2.out",
+        }, 'a')
+        .to(path.current, {
+            duration: 0.50,
+            attr: {
+                d: "M0.0434783 0.0434783C0.0434783 0.0434783 0.319907 0 0.5 0C0.680093 0 0.956522 0.0434783 0.956522 0.0434783C0.956522 0.0434783 1 0.341646 1 0.521739C1 0.701832 0.956522 0.956522 0.956522 0.956522C0.956522 0.956522 0.680093 1 0.5 1C0.319907 1 0.0434783 0.956522 0.0434783 0.956522C0.0434783 0.956522 0 0.680093 0 0.5C0 0.319907 0.0434783 0.0434783 0.0434783 0.0434783Z"
+            },
+            ease: "power2.out",
+        }, 'b')
         .to(clone, {
             duration: 1.5,
-            scale: 1.3,
+            scale: 1,
             top: `${to.top}px`,
             left: `${to.left}px`,
             width: `${to.width}px`,
             height: `${to.height}px`,
             autoRound: false,
             ease: "power2.out",
+        }, 'b')
+        .to(path.current, {
+            duration: 0.15,
+            attr: {
+                d: "M0 0C0 0 0.302755 0 0.5 0C0.697245 0 1 0 1 0C1 0 1 0.326565 1 0.52381C1 0.721054 1 1 1 1C1 1 0.697245 1 0.5 1C0.302755 1 0 1 0 1C0 1 0 0.697245 0 0.5C0 0.302755 0 0 0 0Z"
+            },
+            ease: "power2.out",
         })
 };
-
 
 const calculatePosition = (element) => {
     const rect = element.getBoundingClientRect();
@@ -101,14 +97,3 @@ const calculatePosition = (element) => {
         height: rect.height,
     };
 };
-
-const encodedMaskPath = (path) => {
-    const maskPath = `
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
-            <path d="${path}" fill="white" />
-        </svg>`;
-
-    return `data:image/svg+xml;base64,${btoa(maskPath)}`;
-};
-
-
