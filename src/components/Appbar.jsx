@@ -8,6 +8,7 @@ import {useTheme} from "../hooks/useTheme.js";
 gsap.registerPlugin(ScrollTrigger);
 const links = [
     {path: "/about", label: "About"},
+    {path: "/cases", label: "Cases"},
     {path: "/test", label: "Test"},
 ];
 

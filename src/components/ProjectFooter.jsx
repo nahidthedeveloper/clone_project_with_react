@@ -1,4 +1,5 @@
 import {useTheme} from "../hooks/useTheme.js";
+import {Link} from "react-router-dom";
 
 export default function ProjectFooter({name, image}) {
     const {isDarkTheme} = useTheme()
@@ -19,8 +20,10 @@ export default function ProjectFooter({name, image}) {
                 </div>
             </div>
             <div className="h-[40vw] md:h-[26vw] md:w-4/6 ">
-                <img className="h-full w-full object-center object-cover" src={image}
-                     alt=""/>
+                <Link to="">
+                    <img className="h-full w-full object-center object-cover" src={image}
+                         alt=""/>
+                </Link>
             </div>
         </section>
     )

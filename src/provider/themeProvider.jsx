@@ -9,11 +9,8 @@ export default function ThemeProvider({children}) {
     useLayoutEffect(() => {
         const isLightTheme = lightThemePaths.includes(location.pathname);
 
-        document.body.classList.remove('bg-light', 'bg-dark', 'noise');
+        document.body.classList.remove('bg-light', 'bg-dark');
         document.body.classList.add(isLightTheme ? 'bg-light' : 'bg-dark');
-        if (!isLightTheme) {
-            document.body.classList.add('noise');
-        }
     }, [location]);
 
     return <>{children}</>;
