@@ -1,5 +1,6 @@
 import {useLocation} from "react-router-dom";
 import {useEffect, useState} from "react";
+import CommonLayout from "../Layout/CommonLayout.jsx";
 
 export default function ProjectHero({image, text, client, role, credits}) {
     const location = useLocation();
@@ -54,6 +55,41 @@ export default function ProjectHero({image, text, client, role, credits}) {
                     </div>
                 </div>
             </div>
+
+            <CommonLayout>
+                <div className="mb-[5vw]">
+                    <div>
+                        hello world
+                    </div>
+                    <div className="flex">
+                        <div className="hidden md:block h-[22vw] w-[22vw]">
+                            <img className="h-full w-full object-cover object-center"
+                                 src="/projects/DiscoverylandCo/1.jpg" alt="Image"/>
+                        </div>
+                        <div className="w-[60%] h-[50vw] md:h-[22vw] md:w-[22vw] flex justify-end md:items-end">
+                            <div className="flex items-center md:items-end">
+                                <svg
+                                    viewBox="0 0 26 37"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="h-[7vw] w-[7vw] md:h-[3vw] md:w-[3vw]"
+                                >
+                                    <path
+                                        d="M22 32H4c-1.6 0-2.8-1.3-2.8-2.8V0"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeWidth={1}
+                                        strokeMiterlimit={10}
+                                        strokeDasharray="none"
+                                    />
+                                    <path d="M25.8 32l-7.6-4.4v8.8z" fill="currentColor" opacity={1}/>
+                                </svg>
+                                <p className="ml-2 text-[5vw] md:text-[2vw] translate-y-[10%] md:translate-y-[20%]">Visit
+                                    Website</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </CommonLayout>
         </div>
     )
 }
